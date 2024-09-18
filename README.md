@@ -1,4 +1,4 @@
-# SEON
+# SEON-sint
 Utilizes the [SEON](https://seon.io) API to fetch registered accounts on a phone number or email
 
 # Installation
