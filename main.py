@@ -26,4 +26,5 @@ if __name__ == "__main__":
         print("Search Types: phone, email")
         exit()
     
-    print(json.dumps(results, indent=4))
+    dumped = json.dumps(results, indent=4)
+    print(f"Registered socials: {dumped}")
