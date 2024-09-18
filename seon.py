@@ -7,14 +7,13 @@ def _loadSessionFromConfig() -> dict:
         if config.get("session") == "" or config.get("session") == None:
             print("You did not finish the setup (session is null)")
             exit()
-        
         return {
             "seon-refresh": config["session"]
         }
 
 class SEON:
     def __init__(self):
-        self.cookies = _loadSessionFromConfig()
+        self._cookies = _loadSessionFromConfig()
         self._refreshJWT()
 
     def _getRegisteredSocials(self, socials: dict) -> list[str]:
@@ -24,11 +23,11 @@ class SEON:
         try:
             url = "https://login.seon.io/api/auth/renew"
             data = {}
-            response = requests.post(url, cookies=self.cookies, json=data)
+            response = requests.post(url, cookies=self._cookies, json=data)
             result = response.json()
 
             jwt = result["jwt"]
-            self.cookies["seon-jwt"] = jwt
+            self._cookies["seon-jwt"] = jwt
 
             return jwt
         except:
@@ -37,7 +36,7 @@ class SEON:
     
     def _search(self, url: str, data: dict):
         try:
-            response = requests.post(url, cookies=self.cookies, json=data)
+            response = requests.post(url, cookies=self._cookies, json=data)
             details = response.json()["socialDetails"]
             return self._getRegisteredSocials(details)
         except Exception as err:
