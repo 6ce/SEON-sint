@@ -1,5 +1,5 @@
 # SEON
-Utilizes the [SEON](https://seon.io) API to fetch info on a phone number or email
+Utilizes the [SEON](https://seon.io) API to fetch registered accounts on a phone number or email
 
 # Installation
 1. Install [Python](https://python.org)
