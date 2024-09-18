@@ -6,7 +6,7 @@ Utilizes the [SEON](https://seon.io) API to fetch registered accounts on a phone
 2. Download the repository as a zip file and unzip it
 3. Open a command terminal in the repository's directory [like so](https://streamable.com/v8ysk8)
 4. Run the command `pip install requests`
-5. Create an account @ https://seon.io
+5. Create an account @ https://seon.io (or log in)
 6. Fetch the cookie from your browser called "seon-refresh"
 7. Open the file 'config.json' in your installed directory
 8. Input the copied cookie inside the empty quotation marks next to "session"
