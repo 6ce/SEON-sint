@@ -8,8 +8,9 @@ Utilizes the [SEON](https://seon.io) API to fetch info on a phone number or emai
 4. Run the command `pip install requests`
 5. Create an account @ https://seon.io
 6. Fetch the cookie from your browser called "seon-refresh"
-7. Open the file 'config.json', and input the copied cookie inside the empty quotation marks next to "session"
-8. You'll now be able to run the usage commands
+7. Open the file 'config.json' in your installed directory
+8. Input the copied cookie inside the empty quotation marks next to "session"
+9. You'll now be able to run the usage commands
 
 # Usage
 - Supported search types: phone, email
