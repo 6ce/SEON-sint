@@ -15,12 +15,21 @@ if __name__ == "__main__":
     query = "".join(argv[2::])
 
     if type.lower() == "phone":
-        if not query.startswith("+"):
-            query = "+1" + query
-        query = query.replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
         results = searcher.phone(query)
     elif type.lower() == "email":
         results = searcher.email(query)
+    elif type.lower() == "file":
+        fileType = argv[2]
+        if fileType.lower() == "phone":
+            results = searcher.phoneFile("tosearch.txt")
+        elif fileType.lower() == "email":
+            results = searcher.emailFile("tosearch.txt")
+        else:
+            print("Invalid file search type passed")
+            print("Search Types: phone, email")
+            exit()
+        
+        print("You can also view the results in 'search.json'")
     else:
         print("Invalid search type passed")
         print("Search Types: phone, email")
