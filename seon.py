@@ -1,15 +1,44 @@
 import json
 import requests
 
+def _readFile(fileName: str) -> str:
+    """
+    Reads the input fileName's data
+    """
+    with open(fileName, "r") as file:
+        return file.read()
+
+def _writeFile(fileName: str, data: str | dict | list, format=True):
+    """
+    Writes the input data to the input fileName
+    - If the data is a dict or a list, it will deserialize it automatically
+    """
+    with open(fileName, "w") as file:
+        if type(data) in (dict, list):
+            if format:
+                data = json.dumps(data, indent=4)
+            else:
+                data = json.dumps(data)
+        file.write(data)
+    
+def _readFileLines(fileName: str, strip=True) -> list[str]:
+    """
+    Reads the input fileName's lines
+    """
+    with open(fileName, "r") as file:
+        return [line.strip() if strip else line for line in file.readlines()]
+
 def _loadSessionFromConfig() -> dict:
-    with open("config.json", "r") as file:
-        config = json.loads(file.read())
-        if config.get("session") == "" or config.get("session") == None:
-            print("You did not finish the setup (session is null)")
-            exit()
-        return {
-            "seon-refresh": config["session"]
-        }
+    """
+    Loads session cookies from the config.json file
+    """
+    config = json.loads(_readFile("config.json"))
+    if config.get("session") in ("", None):
+        print("You did not finish the setup (session is null)")
+        exit()
+    return {
+        "seon-refresh": config["session"]
+    }
 
 class SEON:
     """
@@ -61,6 +90,7 @@ class SEON:
         Performs a SEON email search with the input email address
         """
         print(f"Searching for email: {email}")
+
         url = "https://admin.seon.io/api/v2/manual/manual-input/email"
         data = {"email": email}
         return self._search(url, data)
@@ -69,7 +99,40 @@ class SEON:
         """
         Performs a SEON phone search with the input phone number
         """
+        phone = phone.replace("(", "").replace(")", "").replace(" ", "").replace("-", "")
+        if not phone.startswith("+"):
+            phone = "+1" + phone
+
         print(f"Searching for phone: {phone}")
+
         url = "https://admin.seon.io/api/v2/manual/manual-input/phone"
         data = {"phone_number": phone}
         return self._search(url, data)
+    
+    def phoneFile(self, fileName: str) -> list[str]:
+        """
+        Performs a SEON phone search with the input file name
+        """
+        results = {}
+        phones = _readFileLines(fileName)
+        for phone in phones:            
+            if results.get(phone):
+                continue
+            result = self.phone(phone)
+            results[phone] = result
+        _writeFile("search.json", results)
+        return results
+
+    def emailFile(self, fileName: str) -> list[str]:
+        """
+        Performs a SEON email search with the input file name
+        """ 
+        results = {}
+        emails = _readFileLines(fileName)
+        for email in emails:
+            if results.get(email):
+                continue
+            result = self.email(email)
+            results[email] = result
+        _writeFile("search.json", results)
+        return results
