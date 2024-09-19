@@ -12,16 +12,12 @@ Utilizes the [SEON](https://seon.io) API to fetch registered accounts on a phone
 8. Input the copied cookie inside the empty quotation marks next to "session"
 9. You'll now be able to run the usage commands
 
-# Usage
-- Supported search types: phone, email
-
-`python main.py SEARCH_TYPE SEARCH_QUERY`
-
 # Example Usage
-### RAW SEARCHES
+### Supported Search Types: phone, email
+### Raw Searches:
 - Search for the phone number '+11234567890' - `python main.py phone +11234567890`
 - Search for the email address 'email@domain.tld' - `python main.py email email@domain.tld`
-### FILE SEARCHES
+### File Searches:
 **Before using file searches, make sure your input queries in 'tosearch.txt' are formatted correctly**
 - Search for all emails under the 'tosearch.txt' file - `python main.py file email`
 - Search for all phones under the 'tosearch.txt' file - `python main.py file phone`
