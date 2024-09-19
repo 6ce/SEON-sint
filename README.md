@@ -18,6 +18,11 @@ Utilizes the [SEON](https://seon.io) API to fetch registered accounts on a phone
 `python main.py SEARCH_TYPE SEARCH_QUERY`
 
 # Example Usage
-`python main.py phone 1234567890`
+- Search for the phone number '+11234567890' - `python main.py phone +11234567890`
+- Search for the email address 'email@domain.tld' - `python main.py email email@domain.tld`
+- Search for all emails under the 'tosearch.txt' file - `python main.py file email`
+- Search for all phones under the 'tosearch.txt' file - `python main.py file phone`
 
-`python main.py email email@domain.tld`
+# Info
+- **When searching for phones/emails with the file command, they either all need to be phone numbers, or all need to be emails. No mixing.**
+- **When searching for a phone number, you don't have to worry about the format too much as it automatically sanitizes it, but it's still recommended to stick to the same format in the examples**
