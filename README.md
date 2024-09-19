@@ -1,6 +1,10 @@
 # SEON-sint
 Utilizes the [SEON](https://seon.io) API to fetch registered accounts on a phone number or email
 
+# Changelog
+- 09/17/2024 - Repo created
+- 09/19/2024 - Added file searching
+
 # Installation
 1. Install [Python](https://python.org)
 2. Download the repository as a zip file and unzip it
